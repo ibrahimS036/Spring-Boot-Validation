@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Form</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+/* Custom CSS for the form */
+.form-container {
+	max-width: 400px;
+	margin: 50px auto;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+}
+/* Center the heading */
+.center-heading {
+	text-align: center;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="form-container">
+			<!-- Centered heading -->
+			<h2 class="center-heading">Signup Here</h2>
+			<form th:action="@{/submit}" method="post" th:object="${loginData}">
+				<div class="form-group">
+					<label for="username">Username</label> 
+					<input type="text"
+						class="form-control " th:value="${loginData.userName}"
+						th:Classappend="${#fields.hasErrors('userName')?'is-invalid':''}"
+						id="username" name="userName" placeholder="Enter username">
+						
+						<div th:each="e : ${#fields.errors('userName')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback">
+						
+						</div>
+						
+						
+						
+				</div>
+				<div class="form-group">
+					<label for="email"> User Email</label> <input type="email"
+						class="form-control" th:value="${loginData.email}" id="email"
+						th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''"
+						name="email" placeholder="Enter email">
+						
+							
+						<div th:each="e : ${#fields.errors('email')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback">
+						
+						</div>
+						
+				</div>
+				<div class="form-group form-check">
+					<input type="checkbox" class="form-check-input" id="agree"
+					th:classappend="${#fields.hasErrors('agreed')} ? 'is-invalid' : ''"
+						name="agreed"> <label class="form-check-label" for="agree">I
+						agree to the terms and conditions</label>
+						
+						<div th:each="e : ${#fields.errors('agreed')}" th:text="${e}" id="validationServer03Feedback" class="invalid-feedback">
+						
+						</div>
+								
+				</div>
+				
+			<div class="container text-center">
+			<button type="submit" class="btn btn-primary">Submit</button>
+			</div>
+			
+			</form>
+			
+		</div>
+	</div>
+</body>
+</html>
